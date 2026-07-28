@@ -193,15 +193,21 @@ project deliberately does not) and for the Claude/Gemini backend.
 Both repos are public, so this is checkable rather than asserted — diff `majordomo`'s store
 against `store.py` here and the UPDATE-vs-append-only difference is the entire project.
 
+Naming one more for completeness, though **no code is shared with it**:
+`agent-memory-service` (https://github.com/axiom-orion/agent-memory-service, May 2026) is
+where the supersession idea and the governed-vs-ungoverned ablation first appeared in my
+work. That one is a batch consolidation pass over exact `(subject, attribute)` keys with
+deterministic latest-value-wins on FAISS; this one matches online by embedding similarity
+and has an LLM adjudicate contradictions against a lineage-chained CockroachDB table. The
+concept carries over; the code does not.
+
 ---
 
 ## Pre-submission checklist
 
-- [ ] **⚠️ COMMIT THE REPO.** Only `a910758` (the spike) is in git history. `src/`, `scripts/`,
-      `README.md`, `LICENSE`, `pyproject.toml`, `VIDEO-SCRIPT.md` are all **untracked** —
-      the entire engine is one `git clean` from gone, and the hackathon requires a public repo
-      with a top-level LICENSE
-- [ ] Create the GitHub repo and push public (**needs your approval — push gate**)
+- [x] Engine committed — was one `git clean` from gone, with only the spike in git history
+- [x] Repo public with Apache-2.0 detected — https://github.com/axiom-orion/crdb-memory
+- [x] Reuse disclosure corrected — `majordomo` is public, and `agent-memory-service` named
 - [ ] Devpost form **draft-saved** (do this first, empty if necessary)
 - [ ] Video recorded on a **clean Docker session** — DataHub's stack stopped, cluster settled a
       minute before recording

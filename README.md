@@ -90,6 +90,16 @@ Both repositories are public, so that claim is checkable rather than asserted �
 `majordomo`'s store alongside `store.py` here and the difference between an UPDATE-based
 design and an append-only lineage chain is the whole point of this project.
 
+For completeness, one older public repo in the same org is worth naming even though **no
+code is shared with it**: [`agent-memory-service`](https://github.com/axiom-orion/agent-memory-service)
+(May 2026) is where the *supersession* idea — retrieval should return the current value, not
+a stale one — and the governed-vs-ungoverned ablation used to measure it first appeared in
+the author's work. The implementations have nothing in common: that one runs a batch
+consolidation pass over exact `(subject, attribute)` keys with deterministic latest-value-wins
+on FAISS; this one matches online by embedding similarity and asks an LLM to adjudicate
+contradictions, against a lineage-chained CockroachDB table. The concept carries; the code
+does not.
+
 ## Running it
 
 ```bash
