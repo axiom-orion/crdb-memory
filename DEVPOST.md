@@ -183,11 +183,15 @@ The append-only storage engine, the CockroachDB schema, the Claude + Gemini inte
 S3 archive/restore path, and the node-kill demo were all written for this submission.
 
 The **governance algorithm** in `engine.py` — the dedupe/contradiction control flow and the
-recall scoring formula — is adapted from a pre-existing personal project (`majordomo`, a
-SQLite + Qwen concierge memory agent, never published publicly). The algorithm carries over;
-every line implementing it here was rewritten for CockroachDB's append-only constraints (the
-original used in-place `UPDATE`, which this project deliberately does not) and for the
-Claude/Gemini backend.
+recall scoring formula — is adapted from a pre-existing personal project:
+**`majordomo`** (https://github.com/axiom-orion/majordomo), a SQLite + Qwen concierge memory
+agent written before this submission period and published publicly on 2026-07-21 for a
+separate hackathon. The algorithm carries over; every line implementing it here was rewritten
+for CockroachDB's append-only constraints (the original used in-place `UPDATE`, which this
+project deliberately does not) and for the Claude/Gemini backend.
+
+Both repos are public, so this is checkable rather than asserted — diff `majordomo`'s store
+against `store.py` here and the UPDATE-vs-append-only difference is the entire project.
 
 ---
 

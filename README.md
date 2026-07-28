@@ -78,12 +78,17 @@ LLM integration, the S3 archive/restore path, and the node-kill demo were all wr
 this submission.
 
 The **governance algorithm** in `engine.py` — the dedupe/contradiction-check control flow
-and the recall scoring formula — is adapted from a pre-existing personal project
-(`majordomo`, a SQLite + Qwen hotel-concierge memory agent, not published anywhere
-public). The *algorithm* (thresholds, when to reinforce vs. supersede, the scoring
-formula) carries over; every line of code implementing it here was rewritten from scratch
-for CockroachDB's append-only constraints (the original used in-place `UPDATE`, which
-this project deliberately does not) and for the Claude/Gemini backend.
+and the recall scoring formula — is adapted from a pre-existing personal project:
+[`majordomo`](https://github.com/axiom-orion/majordomo), a SQLite + Qwen hotel-concierge
+memory agent written before this submission period and published publicly on 2026-07-21
+for a separate hackathon. The *algorithm* (thresholds, when to reinforce vs. supersede, the
+scoring formula) carries over; every line of code implementing it here was rewritten from
+scratch for CockroachDB's append-only constraints (the original used in-place `UPDATE`,
+which this project deliberately does not) and for the Claude/Gemini backend.
+
+Both repositories are public, so that claim is checkable rather than asserted — read
+`majordomo`'s store alongside `store.py` here and the difference between an UPDATE-based
+design and an append-only lineage chain is the whole point of this project.
 
 ## Running it
 
