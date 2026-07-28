@@ -149,7 +149,7 @@ patch later.
 
 ## Try it out
 
-- **Repo:** _(GitHub URL — Apache-2.0, top-level LICENSE present)_
+- **Repo:** https://github.com/axiom-orion/crdb-memory (Apache-2.0, LICENSE at top level)
 - **Judge access:** must stay reachable through **Sep 15** (caps + billing alarms set)
 
 **Judges: the node-kill demo runs locally with no accounts and no API keys.** Docker is the
