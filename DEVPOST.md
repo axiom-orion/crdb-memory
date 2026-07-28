@@ -107,6 +107,21 @@ rather than hiding it, because a judge running `EXPLAIN` will find it in thirty 
 **Every layer proven on real infrastructure**, not mocks: real Claude, real Gemini, real
 CockroachDB Cloud, real S3 round-trip matching row counts, real node kill.
 
+**And the marquee demo runs on your machine with no accounts and no API keys.**
+`LLM_BACKEND=mock` is the default and runs the entire pipeline — extraction, dedupe,
+contradiction judging, embeddings — offline and deterministically. `scripts/local_cluster.sh`
+spins up the 3-node cluster in Docker. So the resilience claim is not something you have to
+take on faith from a video:
+
+```bash
+scripts/local_cluster.sh up
+python scripts/node_kill_demo.py     # no CockroachDB Cloud account, no API keys
+```
+
+Kill a node, watch a memory write and recall on the surviving quorum, watch the node rejoin
+with its lineage intact. The only pieces that need credentials are the ones that inherently
+do: live Claude/Gemini calls, and the S3 backstop.
+
 ### What I learned
 
 **Append-only is not a limitation you work around for a distributed store — it is the design
@@ -136,6 +151,19 @@ patch later.
 
 - **Repo:** _(GitHub URL — Apache-2.0, top-level LICENSE present)_
 - **Judge access:** must stay reachable through **Sep 15** (caps + billing alarms set)
+
+**Judges: the node-kill demo runs locally with no accounts and no API keys.** Docker is the
+only prerequisite.
+
+```bash
+python -m venv .venv && .venv/Scripts/pip install -e .
+scripts/local_cluster.sh up
+python scripts/node_kill_demo.py     # LLM_BACKEND=mock is the default
+scripts/local_cluster.sh down
+```
+
+Set `LLM_BACKEND=live` with `ANTHROPIC_API_KEY` + `GEMINI_API_KEY` to run the same loop
+against real models, and `DATABASE_URL` to point it at CockroachDB Cloud instead.
 
 ---
 
