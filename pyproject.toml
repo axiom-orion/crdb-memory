@@ -1,0 +1,19 @@
+[project]
+name = "crdbmemory"
+version = "0.1.0"
+description = "Memory that survives — CockroachDB-backed agent memory over the Managed MCP Server, with an S3 durability backstop."
+requires-python = ">=3.11"
+dependencies = [
+    "psycopg[binary]>=3.1.0",
+    "anthropic>=0.68.0",
+    "google-genai>=1.0.0",
+    "boto3>=1.34.0",
+    "python-dotenv>=1.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
